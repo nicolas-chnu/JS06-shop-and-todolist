@@ -174,6 +174,11 @@ input[type=file] {
   transform: translateX(-50%) translateY(-50%);
 }
 
+.item-list {
+  padding: 0;
+  list-style-type: none;
+}
+
 .lab-title {
   text-align: center;
   padding: 60px;
@@ -306,7 +311,7 @@ input[type=file] {
   font-size: 12px;
   font-weight: 300;
 }
-#js-product-modal-content form .success-btn {
+#js-product-modal-content form button[type=submit] {
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -316,16 +321,8 @@ input[type=file] {
   font-weight: 400;
   font-size: 18px;
 }
-#js-product-modal-content form .success-btn:hover {
+#js-product-modal-content form button[type=submit]:hover {
   background-color: #45a049;
-}
-#js-product-modal-content .close {
-  position: absolute;
-  right: 10px;
-  top: 5px;
-  cursor: pointer;
-  font-size: 22px;
-  font-weight: bold;
 }
 
 .select-image-container {
