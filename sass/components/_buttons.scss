@@ -1,0 +1,84 @@
+@use '../abstracts' as a;
+@use '../base';
+
+%button-with-bg-img {
+  background-position: center;
+  background-size: auto 70%;
+  background-repeat: no-repeat;
+}
+
+button,
+.button-base {
+  $not-pressed-color: a.$gray-dark;
+  $pressed-color: a.$gray;
+
+  background-color: $not-pressed-color;
+  border: none;
+  opacity: 1;
+  color: a.$gray-light;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $pressed-color;
+  }
+  &:disabled, &[disabled] {
+    background-color: $pressed-color;
+    opacity: 0.5;
+  }
+}
+
+.rotate-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/rotate-arrow.png");
+}
+
+.next-icon {
+  @extend %button-with-bg-img;
+  background-size: auto 65%;
+  background-image: url("/media/next.png");
+}
+
+.power-switch-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/power-btn.png");
+}
+
+.brightness-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/brightness.png");
+}
+
+.duration-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/duration.png");
+}
+
+.edit-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/edit.png");
+}
+
+.inbox-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/inbox.png");
+}
+
+.outbox-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/outbox.png");
+}
+
+.search-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/search.png");
+}
+
+.add-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/add.png");
+}
+
+.home-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/home.png");
+}

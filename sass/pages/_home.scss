@@ -1,0 +1,24 @@
+@use '../abstracts' as a;
+@use '../components/buttons';
+
+.lab-title {
+  text-align: center;
+  padding: 60px;
+}
+
+.task-links {
+  $text-color: a.$white;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__item {
+    @extend .button-base;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    color: $text-color;
+    font-weight: 300;
+  }
+}
