@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Shop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="large shop-title">Offline Shop</h1>
+
+    <div class="product-section">
+        <div class="product-section__toolbar">
+            <div class="filter-products">
+                <input type="text" name="filter-products" id="filter-products__text" autocomplete="off">
+            </div>
+            <div class="toolbar-actions">
+                <a href="../index.html" class="go-home-btn home-icon"></a>
+                <button class="js-create-product-btn add-icon"></button>
+            </div>
+        </div>
+
+        <ul class="item-list js-product-cards"></ul>
+    </div>
+</div>
+
+<div class="modal" id="js-product-modal">
+    <div class="modal-content" id="js-product-modal-content"></div>
+</div>
+</body>
+</html>
