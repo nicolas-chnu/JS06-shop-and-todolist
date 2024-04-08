@@ -10,7 +10,7 @@ Each product is represented as a list item with the following information:
 
 Your task is to perform the following actions using JavaScript:
 
-- [ ] Adding a new product with a modal
+- [x] Adding a new product with a modal
 - [ ] Deleting a product ("Delete" button next to the product)
 - [ ] Editing product information:
    - On click on the name or price of the product, display a modal

@@ -35,11 +35,11 @@ export class ProductCreateModal extends ModalBase {
             const file = loadImageBtn.firstElementChild.files[0];
             const reader = new FileReader()
 
-            reader.onload = () => {
+            reader.addEventListener('load', () => {
                 const imagePreview = loadImageBtn.nextElementSibling
                 imagePreview.src = reader.result
                 imagePreview.style.display = 'block'
-            }
+            })
 
             if (file) {
                 reader.readAsDataURL(file);
