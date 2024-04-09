@@ -10,8 +10,7 @@ export class ProductCreateModal extends ModalBase {
     }
 
     show() {
-        const innerHTML =
-            `<h2>Add Product</h2>
+        super.show(`<h2>Add Product</h2>
             <form method="post" id="create-product" autocomplete="off">
                 <label for="create-name">Product Name</label>
                 <input type="text" id="create-name" name="name">
@@ -22,28 +21,19 @@ export class ProductCreateModal extends ModalBase {
                         Choose Image
                         <input type="file" id="create-image" name="image">
                     </label>
-                    <img class="preview-image" src="#" alt="Preview Image">
+                    <img class="js-preview-image" src="#" alt="Preview Image">
                 </div>
                 <button type="submit">Submit</button>
-            </form>`
-
-        super.show(innerHTML);
+            </form>`);
 
         const loadImageBtn = this.modalElem.querySelector('.file-upload-label')
+        const imagePreview = this.modalElem.querySelector('.js-preview-image')
 
         loadImageBtn.addEventListener('change', () => {
             const file = loadImageBtn.firstElementChild.files[0];
-            const reader = new FileReader()
 
-            reader.addEventListener('load', () => {
-                const imagePreview = loadImageBtn.nextElementSibling
-                imagePreview.src = reader.result
-                imagePreview.style.display = 'block'
-            })
-
-            if (file) {
-                reader.readAsDataURL(file);
-            }
+            imagePreview.src = URL.createObjectURL(file)
+            imagePreview.style.display = 'block'
         })
     }
 
@@ -51,6 +41,12 @@ export class ProductCreateModal extends ModalBase {
         const name = formElem.querySelector('#create-name').value
         const price = parseInt(formElem.querySelector('#create-price').value)
         const image = formElem.querySelector('#create-image').files[0]
+
+        // revoke preview mage link
+        if (image) {
+            const imagePreview = this.modalElem.querySelector('.js-preview-image')
+            URL.revokeObjectURL(imagePreview.src)
+        }
 
         const dto = new ProductCreateDto(name, price, image)
         this.onSubmit(dto)
