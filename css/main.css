@@ -356,5 +356,11 @@ input[type=file] {
     width: 90%;
   }
 }
+.js-total-price {
+  position: relative;
+  float: right;
+  color: hsl(0, 0%, 39%);
+  font-size: 18px;
+}
 
 /*# sourceMappingURL=main.css.map */

@@ -2,6 +2,7 @@ import {ProductsService} from "./ProductService.js";
 import {ProductCreateModal} from "./modals/ProductCreateModal.js";
 
 const productList = document.querySelector('.js-product-cards')
+const totalPriceLabel = document.querySelector('.js-total-price');
 const modalElem = document.getElementById('js-product-modal');
 
 const addBtn = document.querySelector('.js-create-product-btn')
@@ -41,7 +42,7 @@ function renderProductCards(filter = null) {
         </li>`
     }
 
-    // TODO: update total price label
+    totalPriceLabel.innerText = `Total: $${productsInfo.totalPrice}`
 }
 
 addBtn.addEventListener('click', () => {
