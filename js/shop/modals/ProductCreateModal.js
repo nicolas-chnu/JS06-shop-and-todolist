@@ -2,11 +2,11 @@ import {ModalBase} from "./ModalBase.js";
 import {ProductCreateDto} from "../dto/ProductCreateDto.js";
 
 export class ProductCreateModal extends ModalBase {
-    onSubmit;
+    submitHandler;
 
     constructor(modalElem, onSubmit) {
         super(modalElem);
-        this.onSubmit = onSubmit;
+        this.submitHandler = onSubmit;
     }
 
     show() {
@@ -49,8 +49,15 @@ export class ProductCreateModal extends ModalBase {
         }
 
         const dto = new ProductCreateDto(name, price, image)
-        this.onSubmit(dto)
-        formElem.reset()
-        this.hide()
+
+        let resultPromise = this.submitHandler(dto)
+
+        resultPromise.then(
+            () => {
+                formElem.reset()
+                super.hide()
+            },
+            () => {}
+        )
     }
 }

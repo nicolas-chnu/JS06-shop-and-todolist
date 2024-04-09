@@ -30,33 +30,39 @@ export class ProductsService {
     }
 
     add(dto) {
-        if (!dto.name || dto.name.match(/^ *$/)) {
-            throw new Error('Invalid product name')
-        }
+        return new Promise((resolve, reject) => {
+            if (!dto.name || dto.name.match(/^ *$/)) {
+                reject(new Error('Please enter the name'))
+            }
 
-        if (typeof dto.price !== 'number' || dto.price < 0) {
-            throw new Error('Invalid product price')
-        }
+            if (isNaN(dto.price) || dto.price < 0) {
+                reject(new Error('Please enter the valid price'))
+            }
 
-        if (!dto.imageFile) {
-            throw new Error('Invalid product image')
-        }
+            if (!dto.imageFile) {
+                reject(new Error('Please upload the image'))
+            }
 
-        this.#fetchProducts()
-        if (this.#localProducts.find(p => p.name === dto.name)) {
-            throw new Error('This name is already in use')
-        }
+            this.#fetchProducts()
+            if (this.#localProducts.find(p => p.name === dto.name)) {
+                reject(new Error('The name is already in use'))
+            }
 
-        let imageUrl = URL.createObjectURL(dto.imageFile)
-        const imageId = crypto.randomUUID()
+            const reader = new FileReader()
 
-        localStorage.setItem(imageId, imageUrl)
+            reader.addEventListener('load', () => {
+                const imageId = crypto.randomUUID()
+                localStorage.setItem(imageId, reader.result.toString())
 
-        let product = new Product(dto.name, dto.price, imageId)
-        this.#localProducts.push(product)
+                let product = new Product(dto.name, dto.price, imageId)
+                this.#localProducts.push(product)
 
-        this.#saveChanges()
-        return product.getId()
+                this.#saveChanges()
+                resolve()
+            })
+
+            reader.readAsDataURL(dto.imageFile);
+        })
     }
 
     update(dto) {
