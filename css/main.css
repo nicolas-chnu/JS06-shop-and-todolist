@@ -26,7 +26,7 @@ a {
   color: hsl(0, 0%, 80%);
 }
 
-.home-icon, .add-icon, .search-icon, .outbox-icon, .inbox-icon, .edit-icon, .duration-icon, .brightness-icon, .power-switch-icon, .next-icon, .rotate-icon {
+.home-icon, .add-icon, .search-icon, .outbox-icon, .inbox-icon, .delete-icon, .edit-icon, .duration-icon, .brightness-icon, .power-switch-icon, .next-icon, .rotate-icon {
   background-position: center;
   background-size: auto 70%;
   background-repeat: no-repeat;
@@ -78,6 +78,10 @@ button:disabled, button[disabled],
 
 .edit-icon {
   background-image: url("/media/edit.png");
+}
+
+.delete-icon {
+  background-image: url("/media/recycle-bin.png");
 }
 
 .inbox-icon {
@@ -179,6 +183,15 @@ input[type=file] {
   list-style-type: none;
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
 .lab-title {
   text-align: center;
   padding: 60px;
@@ -260,33 +273,38 @@ input[type=file] {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
-.product-card {
+.js-product-card {
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 10px;
   background-color: hsl(0, 0%, 27%);
   border-radius: 10px;
-  cursor: pointer;
 }
-.product-card:hover {
+.js-product-card:hover {
   background-color: hsl(0, 0%, 23%);
 }
-.product-card__image {
+.js-product-card__image {
   display: block;
   max-width: 100%;
   border-radius: 10px;
   height: auto;
 }
-.product-card__price {
+.js-product-card__price {
   font-size: 20px;
   font-weight: 600;
   color: hsl(0, 0%, 80%);
 }
-.product-card__name {
+.js-product-card__name {
   font-size: 16px;
   font-weight: 300;
   color: hsl(0, 0%, 80%);
+}
+.js-product-card [data-product-action] {
+  cursor: pointer;
+}
+.js-product-card span[data-product-action]:hover {
+  text-decoration: underline;
 }
 
 #js-product-modal-content {

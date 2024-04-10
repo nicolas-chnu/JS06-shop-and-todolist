@@ -1,5 +1,5 @@
 import {Product} from "./Product.js";
-import {ProductsInfoDto} from "./ProductsInfoDto.js";
+import {ProductsInfoDto} from "./dto/ProductsInfoDto.js";
 
 export class ProductsService {
     #productListId = 'shop_products';
@@ -77,9 +77,11 @@ export class ProductsService {
         let product = this.get(dto.id)
 
         if (dto.imageFile) {
+            let imageUrl = localStorage.getItem(product.imageId)
+            URL.revokeObjectURL(imageUrl)
             localStorage.removeItem(product.imageId)
 
-            let imageUrl = URL.createObjectURL(dto.imageFile)
+            imageUrl = URL.createObjectURL(dto.imageFile)
             let imageId = crypto.randomUUID()
 
             product.imageId = imageId
@@ -93,8 +95,11 @@ export class ProductsService {
     }
 
     delete(id) {
-        // unload product image
         let product = this.get(id)
+
+        // unload product image
+        let imageUrl = localStorage.getItem(product.imageId)
+        URL.revokeObjectURL(imageUrl)
         localStorage.removeItem(product.imageId)
 
         let index = this.#localProducts.findIndex(p => p.getId() === id);

@@ -65,14 +65,13 @@
   }
 }
 
-.product-card {
+.js-product-card {
   display: flex;
   flex-direction: column;
   gap: 14px;
   padding: 10px;
   background-color: a.$gray;
   border-radius: 10px;
-  cursor: pointer;
 
   &:hover {
     background-color: a.$gray-dark;
@@ -95,6 +94,14 @@
     font-size: 16px;
     font-weight: 300;
     color: a.$white;
+  }
+
+  [data-product-action] {
+    cursor: pointer;
+  }
+
+  span[data-product-action]:hover {
+    text-decoration: underline;
   }
 }
 

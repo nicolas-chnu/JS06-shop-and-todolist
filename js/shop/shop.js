@@ -5,10 +5,42 @@ const productList = document.querySelector('.js-product-cards')
 const totalPriceLabel = document.querySelector('.js-total-price');
 const modalElem = document.getElementById('js-product-modal');
 
-const addBtn = document.querySelector('.js-create-product-btn')
-
 const productService = new ProductsService()
-const modalCreate = new ProductCreateModal(modalElem, onCreateModalSubmit)
+
+class ProductActions {
+    #productList;
+    #modalCreate;
+
+    constructor() {
+        this.#productList = document.querySelector('.js-product-cards')
+        this.#modalCreate = new ProductCreateModal(modalElem, onCreateModalSubmit)
+
+        document.addEventListener('click', (event) => {
+            const target = event.target
+            const action = target.dataset.productAction
+
+            if (action === undefined) {
+                return
+            } else if (action === 'create') {
+                this.create()
+            }
+
+            const productCard = target.closest('.js-product-card')
+            // this[action](productCard.dataset.productId)
+        })
+    }
+    create() {
+        this.#modalCreate.show()
+    }
+
+    edit(id) {
+        console.log('editing id=', id)
+    }
+
+    delete(id) {
+        console.log('deleting id=', id)
+    }
+}
 
 function onCreateModalSubmit(dto) {
     return new Promise((resolve, reject) => {
@@ -35,20 +67,22 @@ function renderProductCards(filter = null) {
     for (let product of productsInfo.getProducts()) {
         const image = localStorage.getItem(product.imageId)
 
-        productList.innerHTML += `<li class="product-card">
-            <img class="product-card__image" draggable="false" src="${image}" alt="${product.name}">
-            <span class="product-card__price">$${product.price}</span>
-            <span class="product-card__name">${product.name}</span>
+        productList.innerHTML += `<li data-product-id="${product.id}" class="js-product-card">
+            <img class="js-product-card__image" draggable="false" src="${image}" alt="${product.name}">
+            <div class="flex-row space-between">
+                <span data-product-action="edit" class="js-product-card__price">$${product.price}</span>
+                <div class="js-product-actions">
+                    <button data-product-action="delete" class="delete-icon"></button>
+                </div>
+            </div>
+            <span data-product-action="edit" class="js-product-card__name">${product.name}</span>
         </li>`
     }
 
     totalPriceLabel.innerText = `Total: $${productsInfo.totalPrice}`
 }
 
-addBtn.addEventListener('click', () => {
-    modalCreate.show()
-})
-
 document.addEventListener('DOMContentLoaded', () => {
+    const productActions = new ProductActions()
     renderProductCards()
 })

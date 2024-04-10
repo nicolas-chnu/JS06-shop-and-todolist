@@ -58,6 +58,11 @@ button,
   background-image: url("/media/edit.png");
 }
 
+.delete-icon {
+  @extend %button-with-bg-img;
+  background-image: url("/media/recycle-bin.png");
+}
+
 .inbox-icon {
   @extend %button-with-bg-img;
   background-image: url("/media/inbox.png");
